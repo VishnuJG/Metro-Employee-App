@@ -16,28 +16,21 @@ export default function App() {
   const [id, onChangeid] = useState(null);
   const onSubmit=(e)=>{
     e.preventDefault();
-    const scheck = emp.filter((temp)=>{temp.id===id});
-    if(scheck,length>0){
-      Alert.alert('ID Exists', 'ID already exists',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      return;
-    }
     if(!name){
       Alert.alert('Invalid Name', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      return;
     }
     if(!email){ 
       Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      return;
     }
     if(!/\S+@\S+\.\S+/.test(email)){ 
       Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      return;
     }
     if(!id){
       Alert.alert('Invalid Id', 'Invalid ID field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      return;
     }
-    
+    console.log(name);
+    console.log(email);
+    console.log(id);
     const newEmp={id, name, email};
     onChangeName('');
     onChangeEmail('');
@@ -47,47 +40,44 @@ export default function App() {
   return (
     <View style={styles.container} >
         <View style={styles.container}>
-            <Text>Metro Employee App</Text>
-            
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeName}
-              placeholder="Enter your name"
-              value={name}
-            />
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeEmail}
-              value={email}
-              placeholder="Enter your Email"
-              // keyboardType="numeric"
-            />
-          
-            <TextInput
-              style={styles.input}
-              onChangeText={onChangeid}
-              value={id}
-              placeholder="Enter your ID"
-              keyboardType="numeric"
-            />
-            <Button title="Submit"
-              color="green" 
-              onPress={onSubmit}
-              />
-        </View>
+        <Text>Metro Employee App</Text>
+        
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeName}
+          placeholder="Enter your name"
+          value={name}
+        />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeEmail}
+          value={email}
+          placeholder="Enter your Email"
+          // keyboardType="numeric"
+        />
+      
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeid}
+          value={id}
+          placeholder="Enter your ID"
+          keyboardType="numeric"
+        />
+        <Button title="Submit"
+          color="green" 
+          onPress={onSubmit}
+          /></View>
         {/* <View style={{flex:0.5, flexDirection: 'column'}}>
         {emp.map((newid)=>(<Task key={newid.id} ename={newid.name} eid={newid.id} eemail={newid.email}/>))}
         </View> */}
         
-        <DataTable style={{flexDirection: 'column', height:'40%'}} >
+        <DataTable style={{ }} >
           <DataTable.Header style={styles.tableHeader}>
-            <DataTable.Title>Id</DataTable.Title>
+            <DataTable.Title >Id</DataTable.Title>
             <DataTable.Title >Name</DataTable.Title>
             <DataTable.Title >Email</DataTable.Title>
           </DataTable.Header>
-          <ScrollView>
           {emp.map((newid)=>(<Table key={newid.id} ename={newid.name} eid={newid.id} eemail={newid.email}/>))}
-          </ScrollView>
         </DataTable>
         
     </View>
@@ -102,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 20,
-    backgroundColor:'dodgeblue',
+    // paddingTop:20,
     width:'100%',
   },
   input: {

@@ -17,7 +17,7 @@ export default function App() {
   const onSubmit=(e)=>{
     e.preventDefault();
     const scheck = emp.filter((temp)=>{temp.id===id});
-    if(scheck,length>0){
+    if(scheck>0){
       Alert.alert('ID Exists', 'ID already exists',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
       return;
     }
@@ -81,9 +81,10 @@ export default function App() {
         
         <DataTable style={{flexDirection: 'column', height:'40%'}} >
           <DataTable.Header style={styles.tableHeader}>
-            <DataTable.Title>Id</DataTable.Title>
+            <DataTable.Title style={{width:'4%'}}>Id</DataTable.Title>
             <DataTable.Title >Name</DataTable.Title>
             <DataTable.Title >Email</DataTable.Title>
+            <DataTable.Title >More</DataTable.Title>
           </DataTable.Header>
           <ScrollView>
           {emp.map((newid)=>(<Table key={newid.id} ename={newid.name} eid={newid.id} eemail={newid.email}/>))}

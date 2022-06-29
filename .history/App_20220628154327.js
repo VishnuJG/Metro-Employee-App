@@ -17,7 +17,7 @@ export default function App() {
   const onSubmit=(e)=>{
     e.preventDefault();
     const scheck = emp.filter((temp)=>{temp.id===id});
-    if(scheck,length>0){
+    if(scheck>0){
       Alert.alert('ID Exists', 'ID already exists',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
       return;
     }
@@ -37,7 +37,9 @@ export default function App() {
       Alert.alert('Invalid Id', 'Invalid ID field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
       return;
     }
-    
+    console.log(name);
+    console.log(email);
+    console.log(id);
     const newEmp={id, name, email};
     onChangeName('');
     onChangeEmail('');
@@ -81,9 +83,10 @@ export default function App() {
         
         <DataTable style={{flexDirection: 'column', height:'40%'}} >
           <DataTable.Header style={styles.tableHeader}>
-            <DataTable.Title>Id</DataTable.Title>
+            <DataTable.Title style={{widht:1px}}>Id</DataTable.Title>
             <DataTable.Title >Name</DataTable.Title>
             <DataTable.Title >Email</DataTable.Title>
+            <DataTable.Title >More</DataTable.Title>
           </DataTable.Header>
           <ScrollView>
           {emp.map((newid)=>(<Table key={newid.id} ename={newid.name} eid={newid.id} eemail={newid.email}/>))}
@@ -102,7 +105,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     fontSize: 20,
-    backgroundColor:'dodgeblue',
+    // paddingTop:20,
     width:'100%',
   },
   input: {

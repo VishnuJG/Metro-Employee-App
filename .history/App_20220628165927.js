@@ -17,7 +17,7 @@ export default function App() {
   const onSubmit=(e)=>{
     e.preventDefault();
     const scheck = emp.filter((temp)=>{temp.id===id});
-    if(scheck,length>0){
+    if(scheck,l>0){
       Alert.alert('ID Exists', 'ID already exists',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
       return;
     }

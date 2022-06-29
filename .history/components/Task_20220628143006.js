@@ -5,6 +5,7 @@ import { useDimensions } from '@react-native-community/hooks';
 
 
 export default function Task(props) {
+  console.log("Hello");
   return (
     <View style={styles.employee}>
       <Text>Employee Id : {props.eid}</Text>
@@ -22,6 +23,6 @@ const styles = StyleSheet.create({
     width:'100%',
     flex:1,
     // flexDirection:'row',
-    // justifyContent: 'flex-start',
+    justifyContent: 'flex-start',
   }
 });
