@@ -4,19 +4,19 @@ import { DataTable } from 'react-native-paper';
 
 const employees = [
     {
-        name:'Installation',
-        email:'Sample Installation',
-        location:'Request for installation of the sample bot'
+        name:'Surya',
+        email:'suryamnnitk@gmail.com',
+        location:'Bangalore'
     },
     {
-        name:'Configuration',
-        email:'Sample configuration',
-        location:'Configure the new sample demo bot as soon as possible'
+        name:'Vishnu',
+        email:'vishnu@gmail.com',
+        location:'Bangalore'
     },
     {
-        name:'Resource',
-        email:'Provide resource',
-        location:'Provide suitable resource for work'
+        name:'Suhas',
+        email:'suhas@gmail.com',
+        location:'Udupi'
     },
 
 ]
@@ -26,15 +26,15 @@ return (
 	<DataTable style={styles.container}>
 
 	<DataTable.Header style={styles.tableHeader}>
-		<DataTable.Title>Type</DataTable.Title>
-		<DataTable.Title>Sub-type</DataTable.Title>
-		<DataTable.Title>Description</DataTable.Title>
+		<DataTable.Title>Name</DataTable.Title>
+		<DataTable.Title>Email</DataTable.Title>
+		<DataTable.Title>Location</DataTable.Title>
 	</DataTable.Header>
 
     {
         employees.map(emp => {
             return(
-                <DataTable.Row key={emp.email} onPress={()=>{Alert.alert('Employee Data', `Ticket Type : ${emp.name}\n\nTicket Sub-type : ${emp.email}\n\nTicket Description : ${emp.location}`)}}>
+                <DataTable.Row key={emp.email} onPress={()=>{Alert.alert('Employee Data', `Ticket Type : ${emp.name}\nTicket  : ${emp.location}\nEmail : ${emp.email}`)}}>
                     <DataTable.Cell>{emp.name}</DataTable.Cell>
                     <DataTable.Cell>{emp.email}</DataTable.Cell>
                     <DataTable.Cell>{emp.location}</DataTable.Cell>

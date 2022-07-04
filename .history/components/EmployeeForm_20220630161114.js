@@ -34,7 +34,7 @@ export default function EmployeeForm({ navigation }) {
         email:"",
         location:"" 
       });
-      Alert.alert('Ticket Added')
+      Alert.alert('Employee Added')
     }, [employees])
     
   
@@ -59,7 +59,10 @@ export default function EmployeeForm({ navigation }) {
       setEmployees(prevValue => {
         return [...prevValue,emp]
       })
+        
       
+  
+  
   
     }
   
@@ -78,13 +81,13 @@ export default function EmployeeForm({ navigation }) {
             style={styles.input}
             onChangeText={(val) => handleChange('email',val)}
             value={emp.email}
-            placeholder="Enter Ticket sub-type"
+            placeholder="Enter your Email"
           />
           <TextInput
             style={styles.input}
             onChangeText={(val) => handleChange('location',val)}
             value={emp.location}
-            placeholder="Enter ticket Description"
+            placeholder="Enter your Location"
           />
   
           <Button title="Submit"

@@ -34,7 +34,7 @@ export default function EmployeeForm({ navigation }) {
         email:"",
         location:"" 
       });
-      Alert.alert('Ticket Added')
+      Alert.alert('Employee Added')
     }, [employees])
     
   

@@ -21,8 +21,8 @@ export default function App() {
           component={Home}
           options={{ title: 'Home' }}
         />
-        <Stack.Screen name="Add Ticket" component={EmployeeForm} />
-        <Stack.Screen name="View Tickets" component={EmployeeTable} />
+        <Stack.Screen name="Add Employee" component={EmployeeForm} />
+        <Stack.Screen name="View Employees" component={EmployeeTable} />
       </Stack.Navigator>
     </NavigationContainer>
   );

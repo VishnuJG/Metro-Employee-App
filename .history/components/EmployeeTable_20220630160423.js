@@ -34,7 +34,7 @@ return (
     {
         employees.map(emp => {
             return(
-                <DataTable.Row key={emp.email} onPress={()=>{Alert.alert('Employee Data', `Ticket Type : ${emp.name}\n\nTicket Sub-type : ${emp.email}\n\nTicket Description : ${emp.location}`)}}>
+                <DataTable.Row key={emp.email} onPress={()=>{Alert.alert('Employee Data', `Ticket Type : ${emp.name}\n\nTicket Sub-type : ${emp.email}\nTicket Description : ${emp.location}`)}}>
                     <DataTable.Cell>{emp.name}</DataTable.Cell>
                     <DataTable.Cell>{emp.email}</DataTable.Cell>
                     <DataTable.Cell>{emp.location}</DataTable.Cell>

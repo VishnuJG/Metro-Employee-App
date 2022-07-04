@@ -34,7 +34,7 @@ export default function EmployeeForm({ navigation }) {
         email:"",
         location:"" 
       });
-      Alert.alert('Ticket Added')
+      Alert.alert('Employee Added')
     }, [employees])
     
   
@@ -59,7 +59,10 @@ export default function EmployeeForm({ navigation }) {
       setEmployees(prevValue => {
         return [...prevValue,emp]
       })
+        
       
+  
+  
   
     }
   

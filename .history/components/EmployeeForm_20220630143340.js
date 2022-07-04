@@ -34,57 +34,60 @@ export default function EmployeeForm({ navigation }) {
         email:"",
         location:"" 
       });
-      Alert.alert('Ticket Added')
+      Alert.alert('Employee Added')
     }, [employees])
     
   
     const onSubmit=(e)=>{
       e.preventDefault();
-      // if(!emp.name){
-      //   Alert.alert('Invalid Name', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // else if(!emp.location){
-      //   Alert.alert('Invalid Location', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // else if(!emp.email){ 
-      //   Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // else if(!/\S+@\S+\.\S+/.test(emp.email)){ 
-      //   Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
+      if(!emp.name){
+        Alert.alert('Invalid Name', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
+      }
+      else if(!emp.location){
+        Alert.alert('Invalid Location', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
+      }
+      else if(!emp.email){ 
+        Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
+      }
+      else if(!/\S+@\S+\.\S+/.test(emp.email)){ 
+        Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
+      }
       // if(!id){
       //   Alert.alert('Invalid Id', 'Invalid ID field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
       // }
-      
-      setEmployees(prevValue => {
-        return [...prevValue,emp]
-      })
-      
+      else {
+        setEmployees(prevValue => {
+          return [...prevValue,emp]
+        })
+        
+      }
+  
+  
   
     }
   
     return (
       <View style={styles.container} >
           <View style={styles.container}>
-          <Text>Metro Ticket App</Text>
+          <Text>Metro Employee App</Text>
           
           <TextInput
             style={styles.input}
             onChangeText={(val) => handleChange('name',val)}
-            placeholder="Enter Ticket type"
+            placeholder="Enter your name"
             value={emp.name}
           />
           <TextInput
             style={styles.input}
             onChangeText={(val) => handleChange('email',val)}
             value={emp.email}
-            placeholder="Enter Ticket sub-type"
+            placeholder="Enter your Email"
           />
           <TextInput
             style={styles.input}
             onChangeText={(val) => handleChange('location',val)}
             value={emp.location}
-            placeholder="Enter ticket Description"
+            placeholder="Enter your Location"
           />
   
           <Button title="Submit"

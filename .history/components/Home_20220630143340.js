@@ -6,17 +6,17 @@ export default function Home({ navigation }) {
     <View style={styles.container}>
       
         <View style={styles.button}>
-          <Button title="Add Ticket"
+          <Button title="Add Employee"
               onPress={() =>
-                  navigation.navigate('Add Ticket')
+                  navigation.navigate('Add Employee')
               }
           />
         </View>
 
         <View style={styles.button}>
-          <Button title="View Tickets"
+          <Button title="View Employees"
               onPress={() =>
-                  navigation.navigate('View Tickets')
+                  navigation.navigate('View Employees')
               }
           />
         </View>
