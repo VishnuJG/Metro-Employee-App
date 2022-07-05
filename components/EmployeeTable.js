@@ -21,7 +21,7 @@ const employees = [
 
 ]
 
-const EmployeeTable = () => {
+const EmployeeTable = (props) => {
 return (
 	<DataTable style={styles.container}>
 
@@ -34,7 +34,7 @@ return (
     {
         employees.map(emp => {
             return(
-                <DataTable.Row key={emp.email} onPress={()=>{Alert.alert('Employee Data', `Ticket Type : ${emp.name}\n\nTicket Sub-type : ${emp.email}\n\nTicket Description : ${emp.location}`)}}>
+                <DataTable.Row key={emp.email} onPress={()=>{Alert.alert('Employee Data', `Ticket Type : ${emp.name}\n\nTicket Sub-type : ${emp.email}\n\nTicket Description : ${emp.location}`,[{text:"Edit", onPress:()=>{props.navigation.navigate("Edit",{emp:emp})}},{text:"Delete", onPress:()=>{}}])}}>
                     <DataTable.Cell>{emp.name}</DataTable.Cell>
                     <DataTable.Cell>{emp.email}</DataTable.Cell>
                     <DataTable.Cell>{emp.location}</DataTable.Cell>

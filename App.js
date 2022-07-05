@@ -8,6 +8,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import EmployeeForm from './components/EmployeeForm';
 import Home from './components/Home';
 import EmployeeTable from './components/EmployeeTable';
+import EditDetails from './components/EditDetails';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -16,13 +18,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ title: 'Home' }}
-        />
+        <Stack.Screen name="Home" component={Home} options={{ title: 'Home' }}/>
         <Stack.Screen name="Add Ticket" component={EmployeeForm} />
         <Stack.Screen name="View Tickets" component={EmployeeTable} />
+        <Stack.Screen name="Edit" component={EditDetails} options={{ title: 'Edit' }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
