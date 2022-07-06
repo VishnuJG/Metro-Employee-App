@@ -40,21 +40,6 @@ export default function EmployeeForm({ navigation }) {
   
     const onSubmit=(e)=>{
       e.preventDefault();
-      // if(!emp.name){
-      //   Alert.alert('Invalid Name', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // else if(!emp.location){
-      //   Alert.alert('Invalid Location', 'Invalid Name field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // else if(!emp.email){ 
-      //   Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // else if(!/\S+@\S+\.\S+/.test(emp.email)){ 
-      //   Alert.alert('Invalid Email', 'Invalid Email field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
-      // if(!id){
-      //   Alert.alert('Invalid Id', 'Invalid ID field',[{text: 'Okay', onPress:()=>{console.log("Okay Pressed")}},{text: 'No', onPress:()=>{console.log("No Pressed")}}])
-      // }
       
       setEmployees(prevValue => {
         return [...prevValue,emp]
