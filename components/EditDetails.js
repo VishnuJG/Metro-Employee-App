@@ -27,7 +27,7 @@ export default function EditDetails(props) {
         firstUpdate .current = false;
         return;
       }
-    //   console.log(employees);
+    
       onEmpUpdate({
         name: "",
         email:"",

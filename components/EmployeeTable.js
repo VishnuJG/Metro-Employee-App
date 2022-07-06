@@ -1,6 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { StyleSheet,Alert } from 'react-native';
 import { DataTable } from 'react-native-paper';
+import axios from 'axios';
+
+
+const baseUrl = 'http://127.0.0.1:8000';
+
 
 const employees = [
     {
@@ -21,7 +26,15 @@ const employees = [
 
 ]
 
+
+
 const EmployeeTable = (props) => {
+    
+    useEffect(() => {
+        axios({method: 'get',url: 'http://127.0.0.1:8000/get_tickets/',}).then((response) => {console.log(response.data);}).catch(error => console.log(error));;
+      }, []);
+
+
 return (
 	<DataTable style={styles.container}>
 
