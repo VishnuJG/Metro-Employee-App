@@ -2,16 +2,16 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState,useEffect,useRef  } from "react";
 import { StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 
-export default function EmployeeForm({ navigation }) {
+export default function TicketForm({ navigation }) {
 
     const firstUpdate  = useRef(true);
 
     const [employees,setEmployees] = useState([])
   
     const [emp, onEmpUpdate] = useState({
-        name: "",
-        email:"",
-        location:"" 
+        name: "",//issue_type
+        email:"",//issue_sub_type
+        location:"" //description
       });
   
     const handleChange = (name,val)=>{
