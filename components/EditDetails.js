@@ -5,12 +5,12 @@ import { StyleSheet, Text, View, TextInput, Button, Alert} from 'react-native';
 export default function EditDetails(props) {
     const firstUpdate  = useRef(true);
 
-    const [employees,setEmployees] = useState([])
+    const [ticket,setEmployees] = useState([])
   
-    const [emp, onEmpUpdate] = useState({
-        name: props.route.params.emp.name,
-        email: props.route.params.emp.email,
-        location: props.route.params.emp.location 
+    const [tic, onEmpUpdate] = useState({
+        name: props.route.params.ticket.issue_type,
+        email: props.route.params.ticket.issue_sub_type,
+        location: props.route.params.ticket.description 
       });
   
     const handleChange = (name,val)=>{
@@ -27,14 +27,14 @@ export default function EditDetails(props) {
         firstUpdate .current = false;
         return;
       }
-      console.log(employees);
+      console.log(ticket);
       onEmpUpdate({
-        name: "",
-        email:"",
-        location:"" 
+        issue_type: "",
+        issue_sub_type:"",
+        description:"" 
       });
       Alert.alert('Ticket Added')
-    }, [employees])
+    }, [ticket])
     
   
     const onSubmit=(e)=>{
@@ -42,7 +42,7 @@ export default function EditDetails(props) {
       
       
       setEmployees(prevValue => {
-        return [...prevValue,emp]
+        return [...prevValue,tic]
       })
       props.navigation.navigate("Home");
   
@@ -54,20 +54,20 @@ export default function EditDetails(props) {
           
           <TextInput
             style={styles.input}
-            onChangeText={(val) => handleChange('name',val)}
+            onChangeText={(val) => handleChange('issue_type',val)}
             placeholder="Enter Ticket type"
-            value={emp.name}
+            value={tic.issue_type}
           />
           <TextInput
             style={styles.input}
-            onChangeText={(val) => handleChange('email',val)}
-            value={emp.email}
+            onChangeText={(val) => handleChange('issue_sub_type',val)}
+            value={tic.issue_sub_type}
             placeholder="Enter Ticket sub-type"
           />
           <TextInput
             style={styles.input}
-            onChangeText={(val) => handleChange('location',val)}
-            value={emp.location}
+            onChangeText={(val) => handleChange('description',val)}
+            value={tic.description}
             placeholder="Enter ticket Description"
           />
   

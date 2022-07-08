@@ -6,11 +6,11 @@ import { useDimensions } from '@react-native-community/hooks';
 import Task from './components/Task';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import EmployeeForm from './components/EmployeeForm';
+import TicketForm from './components/TicketForm';
 import Home from './components/Home';
-import EmployeeTable from './components/EmployeeTable';
+import TicketTable from './components/TicketTable';
+import Login from './components/Login';
 import EditDetails from './components/EditDetails';
-
 
 const Stack = createNativeStackNavigator();
 
@@ -19,10 +19,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} options={{ title: 'Home' }}/>
-        <Stack.Screen name="Add Ticket" component={EmployeeForm} />
-        <Stack.Screen name="View Tickets" component={EmployeeTable} />
-        <Stack.Screen name="Edit" component={EditDetails} options={{ title: 'Edit' }}/>
+      <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ title: 'Home' }}
+        />
+        <Stack.Screen name="Add Ticket" component={TicketForm} />
+        <Stack.Screen name="View Tickets" component={TicketTable} />
+        <Stack.Screen name="Edit Details" component={EditDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   );
