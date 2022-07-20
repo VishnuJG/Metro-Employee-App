@@ -27,6 +27,7 @@ export default function App() {
             ...prevState,
             isLoading: true,
             isLoggedIn: false,
+            user: null,
           };
         case "AUTH_ERROR":
           return {
@@ -35,6 +36,7 @@ export default function App() {
             isLoading: false,
             isLoggedIn: false,
             error: action.error,
+            user: null,
           };
         case "LOGGED_IN":
           async function setToken(key, value) {
@@ -47,6 +49,7 @@ export default function App() {
             isLoggedIn: true,
             userToken: action.token,
             error: null,
+            user: action.user,
           };
         case "LOGGED_OUT":
           async function deleteToken() {
@@ -59,6 +62,7 @@ export default function App() {
             userToken: null,
             isLoading: false,
             error: null,
+            user: null,
           };
         default:
           return state;
@@ -69,6 +73,7 @@ export default function App() {
       isLoggedIn: false,
       userToken: null,
       error: null,
+      user: null,
     }
   );
 
@@ -86,7 +91,15 @@ export default function App() {
         .get(`${uri}/auth/users/me/`, config)
         .then((response) => {
           console.log(response);
-          dispatch({ type: "LOGGED_IN", token: userToken });
+          let user = {
+            id: response.data["id"],
+            username: response.data["username"],
+          };
+          dispatch({
+            type: "LOGGED_IN",
+            token: userToken,
+            user,
+          });
         })
         .catch((err) => {
           dispatch({ type: "AUTH_ERROR" });
@@ -125,7 +138,6 @@ export default function App() {
         // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
         // In the example, we'll use a dummy token
 
-        console.log(data);
         const config = {
           headers: {
             "Content-Type": "application/json",
@@ -135,8 +147,25 @@ export default function App() {
         axios
           .post(`${uri}/auth/token/login/`, data, config)
           .then(function (response) {
-            console.log(response.data["auth_token"]);
-            dispatch({ type: "LOGGED_IN", token: response.data["auth_token"] });
+            config.headers["Authorization"] =
+              "Token " + response.data["auth_token"];
+            axios
+              .get(`${uri}/auth/users/me/`, config)
+              .then((res) => {
+                let user = {
+                  id: res.data["id"],
+                  username: res.data["username"],
+                };
+                dispatch({
+                  type: "LOGGED_IN",
+                  token: response.data["auth_token"],
+                  user,
+                });
+              })
+              .catch((err) => {
+                dispatch({ type: "AUTH_ERROR" });
+                console.log(err);
+              });
           })
           .catch((e) => {
             dispatch({ type: "AUTH_ERROR", error: "Credentials didn't match" });

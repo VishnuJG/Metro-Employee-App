@@ -1,46 +1,78 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Alert } from "react-native";
-import { DataTable } from "react-native-paper";
+import React, { useState, useEffect, useContext } from "react";
+import { StyleSheet, Alert, View, ScrollView } from "react-native";
+import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import axios from "axios";
+import SweetAlert from "react-native-sweet-alert";
 import Constants from "expo-constants";
 const { manifest } = Constants;
 const uri = `http://${manifest.debuggerHost.split(":").shift()}:8000`;
+import { AuthContext } from "../App";
 
 const TicketTable = () => {
   const [tickets, setTickets] = useState([]);
+  const { authContext, state } = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get(`${uri}/api/get_tickets/`).then(function (response) {
-      setTickets(response.data.tickets);
-    });
+    axios
+      .get(`${uri}/api/get_tickets/${state.user.id}`)
+      .then(function (response) {
+        setTickets(response.data.tickets);
+      });
   }, []);
 
-  return (
-    <DataTable style={styles.container}>
-      <DataTable.Header style={styles.tableHeader}>
-        <DataTable.Title>Type</DataTable.Title>
-        <DataTable.Title>Sub-type</DataTable.Title>
-        <DataTable.Title>Description</DataTable.Title>
-      </DataTable.Header>
+  function deleteTicket() {
+    SweetAlert.showAlertWithOptions(
+      {
+        title: "Hello",
+        subTitle: "hello ",
+        confirmButtonTitle: "OK",
+        confirmButtonColor: "#000",
+        otherButtonTitle: "Cancel",
+        otherButtonColor: "#dedede",
+        style: "success",
+        cancellable: true,
+      },
+      (callback) => console.log("callback")
+    );
+  }
 
-      {tickets.map((ticket) => {
-        return (
-          <DataTable.Row
-            key={ticket.id}
-            onPress={() => {
-              Alert.alert(
-                "Employee Data",
-                `Ticket Type : ${ticket.issue_type}\n\nTicket Sub-type : ${ticket.issue_sub_type}\n\nTicket Description : ${ticket.description}`
-              );
-            }}
-          >
-            <DataTable.Cell>{ticket.issue_type}</DataTable.Cell>
-            <DataTable.Cell>{ticket.issue_sub_type}</DataTable.Cell>
-            <DataTable.Cell>{ticket.description}</DataTable.Cell>
-          </DataTable.Row>
-        );
-      })}
-    </DataTable>
+  const LeftContent = (props) => <Avatar.Icon {...props} icon="check" />;
+  return (
+    <View>
+      <ScrollView>
+        {tickets.map((ticket) => {
+          return (
+            <Card key={ticket.id} style={styles.cardstyle}>
+              <Card.Title title={"# " + ticket.id} left={LeftContent} />
+              <Card.Content>
+                <Title>Type : {ticket.issue_type}</Title>
+                <Paragraph>User ID : {ticket.username}</Paragraph>
+                <Paragraph>Ticket Sub-type : {ticket.issue_sub_type}</Paragraph>
+                <Paragraph>Created Time : {ticket.created_datetime}</Paragraph>
+                <Paragraph>Ticket Description : {ticket.description}</Paragraph>
+              </Card.Content>
+              <Card.Cover source={{ uri: `${uri}${ticket.image}` }} />
+              <Card.Actions>
+                <Button
+                  onPress={() => {
+                    console.log("Hello edit");
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  onPress={() => {
+                    deleteTicket();
+                  }}
+                >
+                  Delete
+                </Button>
+              </Card.Actions>
+            </Card>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 };
 
@@ -52,5 +84,19 @@ const styles = StyleSheet.create({
   },
   tableHeader: {
     backgroundColor: "#DCDCDC",
+  },
+  cardstyle: {
+    boxShadow: "10px 10px 17px -12px rgba(0,0,0,0.75)",
+    borderRadius: 20,
+    flex: 1,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    width: "95%",
+    marginTop: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    marginRight: 50,
+    bottom: 0,
+    padding: 5,
   },
 });
