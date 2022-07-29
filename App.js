@@ -81,34 +81,25 @@ export default function App() {
     // Fetch the token from storage then navigate to our appropriate place
 
     const verifyTokenAsync = async (userToken) => {
-      const config = {
-        headers: {
-          Authorization: "Token " + userToken,
-        },
-      };
       dispatch({ type: "USER_LOADING" });
       axios
-        .get(`${uri}/auth/users/me/`, config)
+        .post(`${uri}/auth/getUserFromToken`, { token: userToken })
         .then((response) => {
           console.log(response);
-          let user = {
-            id: response.data["id"],
-            username: response.data["username"],
-          };
           dispatch({
             type: "LOGGED_IN",
-            token: userToken,
-            user,
+            user: response.data["user"],
+            token: response.data["token"],
           });
         })
         .catch((err) => {
           dispatch({ type: "AUTH_ERROR" });
-          console.log(err);
+          console.log("Auth error");
         });
     };
 
     const fetchTokenAsync = async () => {
-      let userToken;
+      let userToken = "";
 
       try {
         // Restore token stored in `SecureStore` or any other encrypted storage
@@ -138,34 +129,15 @@ export default function App() {
         // After getting token, we need to persist the token using `SecureStore` or any other encrypted storage
         // In the example, we'll use a dummy token
 
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
         dispatch({ type: "USER_LOADING" });
         axios
-          .post(`${uri}/auth/token/login/`, data, config)
+          .post(`${uri}/auth/login`, data)
           .then(function (response) {
-            config.headers["Authorization"] =
-              "Token " + response.data["auth_token"];
-            axios
-              .get(`${uri}/auth/users/me/`, config)
-              .then((res) => {
-                let user = {
-                  id: res.data["id"],
-                  username: res.data["username"],
-                };
-                dispatch({
-                  type: "LOGGED_IN",
-                  token: response.data["auth_token"],
-                  user,
-                });
-              })
-              .catch((err) => {
-                dispatch({ type: "AUTH_ERROR" });
-                console.log(err);
-              });
+            dispatch({
+              type: "LOGGED_IN",
+              token: response.data["token"],
+              user: response.data["user"],
+            });
           })
           .catch((e) => {
             dispatch({ type: "AUTH_ERROR", error: "Credentials didn't match" });

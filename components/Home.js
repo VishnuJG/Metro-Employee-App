@@ -14,14 +14,14 @@ export default function Home({ navigation }) {
           Hello {state.user["username"]} - {state.user["id"]}{" "}
         </Text>
       </View>
-
-      <View style={styles.button}>
-        <Button
-          title="Add Ticket"
-          onPress={() => navigation.navigate("Add Ticket")}
-        />
-      </View>
-
+      {state.user.groups[0] == 1 ? (
+        <View style={styles.button}>
+          <Button
+            title="Add Ticket"
+            onPress={() => navigation.navigate("Add Ticket")}
+          />
+        </View>
+      ) : null}
       <View style={styles.button}>
         <Button
           title="View Tickets"
