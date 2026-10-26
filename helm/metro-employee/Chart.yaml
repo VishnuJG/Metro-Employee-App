@@ -1,0 +1,7 @@
+apiVersion: v2
+name: metro-employee
+description: A Helm chart for deploying Metro Employee App
+version: 0.1.0
+
+# This is the chart version
+appVersion: "1.0.0"
